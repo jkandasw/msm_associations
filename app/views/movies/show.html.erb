@@ -25,7 +25,48 @@
         <a href="/directors/<%@movie.director_id%>"><%= Director.find_by(@movie.director_id).name %></a>
       </dd>
 
-    </dl>
+      <dt>Character</dt>
+<dd>
+    <% @movie.characters.each do |character| %>
+        <a href="/actors/<%= character.actor_id %>">
+          <%= character.actor.name %>
+        </a>
+        (<%= character.name %>)
+
+    <% end %>
+      Add a new character
+
+
+      <form action="/create_character" method="post">
+                <input name="movie_id" type="hidden" value="<%= @movie.id %>">
+
+        <!-- Label and input for actor_id -->
+        <div class="form-group">
+          <label for="actor_id" class="control-label">
+            Actor
+          </label>
+          <%= select_tag(:actor_id, options_from_collection_for_select(Actor.all, :id, :name), :class => "form-control") %>
+
+            <a href="/actors/new">Add new actor</a>
+
+        </div>
+
+        <!-- Label and input for name -->
+        <div class="form-group">
+          <label for="name" class="control-label">
+            Name
+          </label>
+          <input type="text" id="name" name="name" placeholder="Name" class="form-control">
+        </div>
+
+        <button class="btn btn-success">
+          Create Character
+        </button>
+      </form>
+    </li>
+  </ul>
+</dd>
+</dl>
 
     <div class="btn-group btn-group-justified">
       <a href="/movies" class="btn btn-primary">
