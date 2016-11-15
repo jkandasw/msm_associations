@@ -22,10 +22,11 @@
 
       <dt>Director</dt>
       <dd>
-        <a href="/directors/<%@movie.director_id%>"><%= Director.find_by(@movie.director_id).name %></a>
+        <a href="/directors/<%@movie.director_id%>">
+          <%= @movie.director.name %></a>
       </dd>
 
-      <dt>Character</dt>
+      <dt>Actor (Character)</dt>
       <dd>
         <ul class="list-group">
           <% @movie.characters.each do |character| %>
